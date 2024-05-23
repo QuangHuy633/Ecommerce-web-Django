@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- Header-->
+        {% comment %} <header class=" py">
+            <div class="container px px-lg my">
+                <div class="text-center text-black">
+                    <h3 class="display-4 fw-bolder">
+                    {{ category }}
+                </h3>
+                </div>
+            </div>
+        </header> {% endcomment %}
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+            
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        
+                    {% for product in products %}
+                    {% if product.is_sale %}
+                        <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                            <div class="single-product-item">
+                                <figure>
+                                    <a href="#"><img src="{{product.image.url}}" alt=""></a>
+                                    <div class= "text-black position-absolute" style="top: 0.5rem; left: 0.5rem;">5</div>
+                                    <div class= "badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem;background-color: #FF3102">Sale</div>
+                                </figure>
+                                <div class="product-text">
+                                    <h6>{{product.name}}</h6>
+                                    <p><strike>
+                                        ${{product.price}}
+                                    </strike>
+                                    &nbsp;
+                                        ${{product.sale_price}}</p>
+                                </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                  <div class="text-center"><a class="btn btn-success mt-auto" style="border-radius: 50px" href="{% url 'product' product.id %}">Details</a></div>
+                              </div>
+                            </div>
+                    </div>
+                    {% else %}
+
+                            <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                                <div class="single-product-item">
+                                    <figure>
+                                        <a href="#"><img src="{{product.image.url}}" alt=""></a>
+                                        <div class= "text-black position-absolute" style="top: 0.5rem; left: 0.5rem;">5</div>
+
+                                    </figure>
+                                    <div class="product-text">
+                                        <h6>{{product.name}}</h6>
+                                        <p>${{product.price}}</p>
+                                    </div>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                      <div class="text-center"><a class="btn btn-success mt-auto" style="border-radius: 50px" href="{% url 'product' product.id %}">Details</a></div>
+                                  </div>
+                                </div>
+                            </div>
+
+                    {% endif %}
+                    {% endfor %}
+
+
+            </div>
+        </section>
+
+{% endblock %}

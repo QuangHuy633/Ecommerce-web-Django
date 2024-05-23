@@ -1,0 +1,79 @@
+        
+        {% load static %}
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+        <header class="header-section">
+            <div class="container-fluid">
+                <div class="inner-header">
+                    <div class="logo">
+                        <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" style="width: 133px; height:42px"></a>
+                    </div>
+
+                    <div class="header-right">
+                        <a class= "mx-1"  href="{% url 'search' %}">
+                            <img src="{% static 'img/icons/search.png' %} " alt="" id = "search" class="search-trigger">
+                        </a>
+                        <a class= "mx-2"  href="{% url 'update_user' %}">
+                            <img src="{% static 'img/icons/man.png' %} " alt="">
+                        </a>
+                       
+                        <a class= "mx-2"  href="{% url 'cart_summary' %}">
+                            <img src="{% static 'img/icons/bag.png'%} " alt="">
+                            <span id="cart_quantity">{{ cart|length }}</span>
+                        </a>
+                        {% comment %} <a href="{% url 'logout' %}">
+                            <img  src="{% static 'img/logout.png' %}" alt="" style="width: 20px; height: 20px; margin-left: 10px">
+                        </a> {% endcomment %}
+                        {% comment %} <form class="d-flex">
+                            <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark"><i class="bi-cart-fill me-1"></i>Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}</span></a>
+                        </form> {% endcomment %}
+                    </div>
+                    {% if user.is_authenticated %}
+                            {% comment %} <div class="user-access">
+                                <a href="{% url 'update_user' %}">Profile</a>
+                            </div>  {% endcomment %}
+                            <div class="user-access">
+                                <li class="nav-item dropdown list-unstyled">
+                                {% comment %} class="nav-link dropdown-toggle"  {% endcomment %}
+                                <a id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                                <a href="{% url 'logout' %}" class="in">Logout</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'update_user' %}">User Profile</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'update_info'  %}">User Info</a></li>
+                                </ul>
+                                </li>
+                                
+                            </div>
+                            {% else %}
+                                <div class="user-access">
+                                    <a href="{% url 'register'%}">Register</a>
+                                    <a href="{% url 'login' %}" class="in">Login</a>
+                                </div>                      
+                        {% endif %}
+                        
+                    <nav class="main-menu mobile-menu">
+                        <ul>
+                            <li><a class= "mx--5" class="active" href="{% url 'home' %}">Home</a></li>
+                            {% comment %} <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a> {% endcomment %}
+                            <li><a class= "mx--5" href="#">Category</a>
+                                <ul class="sub-menu">
+                                    <li><a href="{% url 'category_summary' %}">All Products</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a href="{% url 'category' 'Clothes' %}">Clothes</a></li>
+                                    <li><a href="{% url 'category' 'Accessory' %}">Accessory</a></li>
+                                </ul>
+                            </li>
+                            <li><a class= "mx--5" href="{% url 'about' %}">About</a></li>
+                            <li><a class= "mx--5" href="#">Blog</a></li>
+                            <li><a class= "mx--5" href="{% url 'contact' %}">Contact</a></li>
+                            
+                        </ul>
+                    </nav>
+                    
+                </div>
+            </div>
+        </header>
+

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- Header-->
+
+        <div class="container">
+        	<div class="row">
+        		<center>
+        			<div class="col-10">
+        				<br/><br/>
+{% comment %} <div class="card">
+  <div class="card-header">
+    Search Products
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+  
+          <input type="text" class="form-control" placeholder="Search For Products" name="searched">
+        </div>
+    <button type="submit" class="btn btn-secondary">
+        Search Products
+    </button>
+    </form>
+  </div>
+</div> {% endcomment %}
+<div class="col-md-6 col-lg-11 col-11 mx-auto my-auto search-box" >
+    <form method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="input-group form-container">
+            <input type="text" name="searched" class="form-control seach-input" placeholder="Search Products" autofocus="autofocus" autocomplete="off">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-search" width="40" style="height: 38   px;background: #03a3b2;color: #Fff;">
+                    <img src="{% static 'img/icons/search.png' %}">
+                </button> 
+            </span>
+        </div>
+        
+
+</form>
+</div>
+<br/><br/>
+<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+{% if searched %}
+    {% for product in searched %}
+    {% if product.is_sale %}
+    <div class="col-lg-3 col-sm-6 mix all dresses bags">
+        <div class="single-product-item">
+            <figure>
+                <a href="#"><img src="{{product.image.url}}" alt=""></a>
+                <div class= "text-black position-absolute" style="top: 0.5rem; left: 0.5rem;">5</div>
+                <div class= "badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem;background-color: #FF3102">Sale</div>
+            </figure>
+            <div class="product-text">
+                <h6>{{product.name}}</h6>
+                <p><strike>
+                    {{product.price}}
+                </strike>
+                &nbsp;
+                    {{product.sale_price}}</p>
+            </div>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
+          </div>
+        </div>
+</div>
+{% else %}
+
+        <div class="col-lg-3 col-sm-6 mix all dresses bags">
+            <div class="single-product-item">
+                <figure>
+                    <a href="#"><img src="{{product.image.url}}" alt=""></a>
+                    <div class= "text-black position-absolute" style="top: 0.5rem; left: 0.5rem;">5</div>
+
+                </figure>
+                <div class="product-text">
+                    <h6>{{product.name}}</h6>
+                    <p>{{product.price}}</p>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
+              </div>
+            </div>
+        </div>
+
+{% endif %}
+    {% endfor %}
+{% endif %}
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        			</div>
+        		</center>
+        	</div>
+        </div>
+
+{% endblock %}
